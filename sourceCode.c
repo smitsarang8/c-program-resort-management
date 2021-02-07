@@ -25,19 +25,19 @@ struct service
 } s1;
 
 //smsarang
-void check_system_files();
-void create_authentication_csv(int authenticated,char *filename,char userinputusername[],char userinputpassword[]);
-void create_services_csv(char *filename, char userinputusername[]);
-void read_services_csv(char *filename, char searchQ[]);
-void update_service_price_csv(char *filename, char recordNo[], char newPrice[]);
-void generate_backup_file_of_all();
+void checkSystemFile();
+void createAuthenticationCsv(int authenticated,char *filename,char userinputusername[],char userinputpassword[]);
+void createServicesCsv(char *filename, char userinputusername[]);
+void readServicesCsv(char *filename, char searchQ[]);
+void updateServicepriceCsv(char *filename, char recordNo[], char newPrice[]);
+void generateBakupFileOfAll();
 
 /*
 To check if required files are created or not to store information.
 @param char pointer variable filename
 author : smit
 */
-void check_system_files(){
+void checkSystemFile(){
     FILE *fp;
     char *filename="datafile_authenticationlogs.csv";
     printf("\n\n!!!Setting up the required files...\n");
@@ -105,7 +105,7 @@ To create services
 @param char userinputusername
 author : smit
 */
-void create_services_csv(char *filename, char userinputusername[])
+void createServicesCsv(char *filename, char userinputusername[])
 {
     FILE *fp;
     int i, count;
@@ -146,7 +146,7 @@ To read services
 @param char searchQ
 author : smit
 */
-void read_services_csv(char *filename, char searchQ[])
+void readServicesCsv(char *filename, char searchQ[])
 {
     char temp[100];
     char lines[100];
@@ -184,14 +184,14 @@ void read_services_csv(char *filename, char searchQ[])
 To take backup of all the data files.
 author : smit
 */
-void generate_backup_file_of_all(){
+void generateBakupFileOfAll(){
     time_t t;
     time(&t);
     printf("\n!!!generating backup as per %s\n", ctime(&t));
 }
 
 
-// void update_service_price_csv(char *filename, char recordNo[], char newPrice[])
+// void updateServicepriceCsv(char *filename, char recordNo[], char newPrice[])
 // {
 //     char temp[100];
 //     char rowData[100];
@@ -293,7 +293,7 @@ int main(int cli_params, char *args[])
     // char userinputpassword[20];
     if(cli_params>1){
         if(!strcmp(args[1],"syscheck")){
-            check_system_files();
+            checkSystemFile();
         }
         exit(1);
     }
@@ -305,9 +305,9 @@ int main(int cli_params, char *args[])
 
     // if(strcmp(admin_user1.username,userinputusername)==0 && strcmp(admin_user1.password,userinputpassword)==0){
     //     authenticated=1;
-    //     create_authentication_csv(authenticated, filename_authenticaction,userinputusername,userinputpassword);
+    //     createAuthenticationCsv(authenticated, filename_authenticaction,userinputusername,userinputpassword);
     // }else{
-    //     create_authentication_csv(authenticated, filename_authenticaction,userinputusername,userinputpassword);
+    //     createAuthenticationCsv(authenticated, filename_authenticaction,userinputusername,userinputpassword);
     // }
     
 
@@ -322,18 +322,18 @@ int main(int cli_params, char *args[])
         switch (choice)
         {
         case 1:
-            create_services_csv(filename_services, "dummyuser");
+            createServicesCsv(filename_services, "dummyuser");
             break;
         case 2:
-            read_services_csv(filename_services, "usernameofadmin");
+            readServicesCsv(filename_services, "usernameofadmin");
             break;
         case 3:
-            generate_backup_file_of_all();
+            generateBakupFileOfAll();
         default:
             break;
         }
-    // update_service_price_csv(filename_services, "2", "999");
-    // generate_backup_file_of_all();
+    // updateServicepriceCsv(filename_services, "2", "999");
+    // generateBakupFileOfAll();
     }else{
         printf("\nAuth failed");
     }
